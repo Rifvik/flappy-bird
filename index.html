@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Flappy Bird - High Refresh Rate Arcade Game</title>
+  <meta name="description" content="A modern Flappy Bird game supporting high refresh rate displays (144Hz/240Hz+), custom skins, Web Audio synth sounds, particle effects, and local high scores.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header / Brand Bar -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🐤</span> FLAPPY <span class="highlight">BIRD</span>
+      </div>
+      <div class="header-actions">
+        <div class="fps-badge" id="fpsDisplay">FPS: --</div>
+        <button id="soundToggleBtn" class="icon-btn" title="Toggle Sound">
+          <span id="soundIcon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Frame -->
+    <main class="game-wrapper">
+      <canvas id="gameCanvas" width="480" height="640"></canvas>
+
+      <!-- Live Score Badge (Visible during play) -->
+      <div id="inGameScore" class="in-game-score">0</div>
+
+      <!-- Start Screen Overlay -->
+      <div id="startScreen" class="overlay active">
+        <div class="overlay-card glass">
+          <h1 class="game-title">FLAPPY<br><span class="neon-text">BIRD</span></h1>
+          <p class="subtitle">High Refresh Rate Native Arcade</p>
+
+          <div class="controls-guide">
+            <div class="key-badge">SPACE</div> / <div class="key-badge">CLICK</div> / <div class="key-badge">TAP</div>
+            <p>Flap wings & navigate through obstacles!</p>
+          </div>
+
+          <!-- Difficulty Selector -->
+          <div class="setting-group">
+            <label class="setting-label">DIFFICULTY</label>
+            <div class="pill-selector" id="difficultySelector">
+              <button class="pill-btn" data-diff="easy">Easy</button>
+              <button class="pill-btn active" data-diff="classic">Classic</button>
+              <button class="pill-btn" data-diff="hard">Hard</button>
+            </div>
+          </div>
+
+          <!-- Character Skin Selector -->
+          <div class="setting-group">
+            <label class="setting-label">CHARACTER SKIN</label>
+            <div class="skin-selector" id="skinSelector">
+              <button class="skin-card active" data-skin="azure">
+                <div class="skin-preview azure-skin-icon"></div>
+                <span>Azure</span>
+              </button>
+              <button class="skin-card" data-skin="gold">
+                <div class="skin-preview gold-skin-icon"></div>
+                <span>Gold</span>
+              </button>
+              <button class="skin-card" data-skin="silver">
+                <div class="skin-preview silver-skin-icon"></div>
+                <span>Silver</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="startBtn" class="primary-btn glow-btn">
+            START GAME <span>▶</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pause Screen Overlay -->
+      <div id="pauseScreen" class="overlay hidden">
+        <div class="overlay-card glass">
+          <h2 class="overlay-title">GAME PAUSED</h2>
+          <div class="pause-actions">
+            <button id="resumeBtn" class="primary-btn glow-btn">RESUME</button>
+            <button id="restartPauseBtn" class="secondary-btn">RESTART</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="gameOverScreen" class="overlay hidden">
+        <div class="overlay-card glass">
+          <h2 class="overlay-title game-over-text">GAME OVER</h2>
+
+          <div class="stats-card">
+            <div class="medal-wrapper">
+              <div id="medalIcon" class="medal-icon medal-none">?</div>
+              <span id="medalLabel" class="medal-label">NO MEDAL</span>
+            </div>
+            <div class="score-grid">
+              <div class="score-box">
+                <span class="score-label">SCORE</span>
+                <span id="finalScore" class="score-val">0</span>
+              </div>
+              <div class="score-box">
+                <span class="score-label">BEST</span>
+                <span id="bestScore" class="score-val">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="overlay-buttons">
+            <button id="restartBtn" class="primary-btn glow-btn">PLAY AGAIN 🔄</button>
+            <button id="menuBtn" class="secondary-btn">MAIN MENU 🏠</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Controls Bar -->
+    <footer class="app-footer">
+      <div class="footer-info">
+        <span>Monitor Sync: Active</span> • 
+        <span>Delta Physics Engine</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
